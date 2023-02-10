@@ -1,6 +1,7 @@
 package trip.cafe.tripcafebackend.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import trip.cafe.tripcafebackend.domain.Cafe;
@@ -8,6 +9,10 @@ import trip.cafe.tripcafebackend.dto.CafeResponseDTO;
 import trip.cafe.tripcafebackend.dto.CafeSaveRequestDTO;
 import trip.cafe.tripcafebackend.dto.CafeUpdateRequestDTO;
 import trip.cafe.tripcafebackend.repository.CafeRepository;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -22,6 +27,22 @@ public class CafeService {
         return cafeRepository.save(requestDTO.toEntity()).getId();
     }
 
+    /*
+     * location별 카페 리스트 조회
+     */
+    public List<CafeResponseDTO> findByLocation (String location) {
+//        Optional<Cafe> list = cafeRepository.findByLocation(location);
+//        return list.stream().map(CafeResponseDTO::new).toList();
+
+        return cafeRepository.findByLocation(location)
+                .stream()
+                .map(CafeResponseDTO::new)
+                .toList();
+
+    }
+
+
+
     @Transactional
     public Long update(Long id, CafeUpdateRequestDTO requestDTO) {
         Cafe cafe = cafeRepository.findById(id)
@@ -31,6 +52,17 @@ public class CafeService {
 
         return id;
     }
+
+    /*
+     * 카페 전체 조회
+     */
+    public List<CafeResponseDTO> findAll() {
+
+        List<Cafe> list = cafeRepository.findAll();
+        return list.stream().map(CafeResponseDTO::new).toList();
+    }
+
+
 
     /**
      * 카페 조회
