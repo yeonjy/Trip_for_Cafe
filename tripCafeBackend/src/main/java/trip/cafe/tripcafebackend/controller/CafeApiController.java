@@ -1,30 +1,24 @@
 package trip.cafe.tripcafebackend.controller;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import trip.cafe.tripcafebackend.domain.Address;
-import trip.cafe.tripcafebackend.domain.Cafe;
+import org.springframework.web.servlet.ModelAndView;
+import trip.cafe.tripcafebackend.dto.CafeResponseDTO;
 import trip.cafe.tripcafebackend.dto.CafeSaveRequestDTO;
 import trip.cafe.tripcafebackend.service.CafeService;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("api")
 
 public class CafeApiController {
 
     private final CafeService cafeService;
-
-//    @GetMapping("/locations/cafes/new")
-//    public String createForm(Model model) {
-//        model.addAttribute("cafeForm", new CafeForm());
-//        return "api/createCafeForm";  //만들어야됨~
-//    }
 
     /**
      * 카페 생성
@@ -33,6 +27,22 @@ public class CafeApiController {
     public Long save(@RequestBody final CafeSaveRequestDTO requestDTO) {
 
         return cafeService.save(requestDTO);
-
     }
+
+
+    /*
+     * location별 카페 리스트 조회
+     */
+    @GetMapping("/locations/{location}")
+    public ModelAndView findByLocation(@PathVariable String location) {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/api/location-view");
+        modelAndView.addObject("location", location);
+        modelAndView.addObject("cafe", cafeService.findByLocation(location));
+
+        return modelAndView;
+    }
+
+
 }
