@@ -25,6 +25,8 @@ public class CafeSaveRequestDTO {
                 .name(name)
                 .phoneNum(phoneNum)
                 .address(new Address(zipcode, street, detail))
+                .location(street.split(" ")[1])
+                .locationDetail(street.split(" ")[2])
                 .build();
     }
 

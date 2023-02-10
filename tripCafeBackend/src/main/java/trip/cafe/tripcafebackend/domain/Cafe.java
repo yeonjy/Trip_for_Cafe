@@ -24,7 +24,10 @@ public class Cafe {  //사진 업로드 추가 필요
 
     private String phoneNum;
 
-    private String location;  //select 이용해서 저장하기
+    private String location;  //입력받은 주소에서 추출하기
+
+    @Column(name = "location_detail")
+    private String locationDetail;  //입력받은 주소에서 추출하기
 
     @Embedded
     private Address address;
@@ -33,10 +36,12 @@ public class Cafe {  //사진 업로드 추가 필요
     private List<CafeEvaluate> tags = new ArrayList<>();
 
     @Builder
-    public Cafe(String name, String phoneNum, Address address) {
+    public Cafe(String name, String phoneNum, Address address, String location, String locationDetail) {
         this.name = name;
         this.phoneNum = phoneNum;
         this.address = address;
+        this.location = location;
+        this.locationDetail = locationDetail;
     }
 
 
