@@ -56,11 +56,11 @@
                         </div>
                         <div class="field half">
                             <label for="zipcode">우편번호</label>
-                            <input type="text" name="zipcode" id="zipcode" />
+                            <input type="text" name="zipcode" id="zipcode" readonly onclick="findAddr()"/>
                         </div>
                         <div class="field half">
                             <label for="street">도로명 주소</label>
-                            <input type="text" name="street" id="street" />
+                            <input type="text" name="street" id="street" readonly/>
                         </div>
                         <div class="field half">
                             <label for="detail">상세주소</label>
@@ -125,6 +125,49 @@
 
 
     </footer>
+
+
+    <th:block>
+        <script>
+
+            function findAddr() {
+                new daum.Postcode({
+                    oncomplete: function(data) {
+
+                        var addr = '';  // 주소 변수
+                        var extraAddr = '';  //참고항목 변수
+
+                        if (data.userSelectedType == 'R') { //사용자가 도로명 주소를 선탣했을 경우
+                            addr = data.roadAddress;
+                        } else {  //사용자가 지번 주소를 선택했을 경우(J)
+                            addr = data.jibunAddress;
+                        }
+
+                        if(data.userSelectedType == 'R') {
+                            if (data.bname != '' && /[동|로|가]$/g.test(data.bname)) {
+                                extraAddr += data.bname;
+                            }
+                            if (data.buildingName != '' && data.apartment == 'Y') {
+                                extraAddr += (extraAddr != '' ? ', ' + data.buildingName : data.buildingName);
+                            }
+                            if (extraAddr != '') {
+                                extraAddr = ' (' + extraAddr + ')';
+                            }
+                            document.getElementById("detail").value = extraAddr;
+                        } else {
+                            document.getElementById("detail").value = '';
+                        }
+                        document.getElementById('zipcode').value = data.zonecode;
+                        document.getElementById('street').value = addr;
+                        document.getElementById('detail').focus();
+                    }
+                }).open();
+            }
+
+        </script>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    </th:block>
+
 
 
     <th:block>
