@@ -39,7 +39,7 @@ public class CafeApiController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/api/location-view");
         modelAndView.addObject("location", location);
-        modelAndView.addObject("cafe", cafeService.findByLocation(location));
+        modelAndView.addObject("cafe", cafeService.findByLocationFirst(location));
 
         return modelAndView;
     }
