@@ -68,8 +68,8 @@
 <!--										<input type="hidden" th:name="수원" th:value="${name}" />-->
 <!--										<a th:href="@{'/api/locations(name=수원)'}"/>-->
 
-										<a th:href="@{/api/locations/{location}(location= '수원시')}">
-										<h3>수원</h3>
+										<a th:href="@{/api/locations/{location}(location= '경기')}">
+										<h3>경기</h3>
 										<p>Ipsum dolor sit amet</p>
 										</a>
 <!--										</form>-->
@@ -80,8 +80,10 @@
 										<img src="/images/pic02.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="landing.html" class="link">부산</a></h3>
+										<a th:href="@{/api/locations/{location}(location= '부산')}">
+										<h3>부산</h3>
 										<p>feugiat amet tempus</p>
+										</a>
 									</header>
 								</article>
 								<article>
