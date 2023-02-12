@@ -23,14 +23,19 @@ public class Board extends BaseEntity {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cafe_id")
+    private Cafe cafe;
+
+
+    @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "member_id")
     private Member member;
 
     @Builder
-    public Board(String title, String content, Member member) {
+    public Board(String title, String content, Cafe cafe) {
+        this.cafe = cafe;
         this.title = title;
         this.content = content;
-        this.member = member;
     }
 
 
