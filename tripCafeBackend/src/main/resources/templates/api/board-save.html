@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic - Forty by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+	<form name="cafeIdForm" action="#" method="post">
+	</form>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="locations.html" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="locations.html">Home</a></li>
+							<li><a href="landing.html">Landing</a></li>
+							<li><a href="generic.html">Generic</a></li>
+							<li><a href="elements.html">Elements</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="#" class="button primary fit">Get Started</a></li>
+							<li><a href="#" class="button fit">Log In</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main" class="alt">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h1>카페 리뷰를 등록하세요!☕</h1>
+									</header>
+									<span class="image main"><img src="/images/pic11.jpg" alt="" /></span>
+								</div>
+							</section>
+
+					</div>
+
+				<!-- Contact -->
+					<section id="contact">
+						<div class="inner">
+							<section>
+								<form id="form">  <!-- id부여 -->
+									<div class="fields">
+
+										<div class="field half">
+											<label for="title">제목</label>
+											<input type="text" name="title" id="title" placeholder="제목을 입력해주세요." />
+										</div>
+										<div class="field half">
+											<label>카페</label>
+											<p th:text="${cafeObj.name}" ></p>
+											<input type="hidden" th:name="cid" th:value="${cafeObj.id}"/>
+
+										</div>
+										<div class="field">
+											<label for="content">내용</label>
+											<textarea name="content" id="content" rows="6" placeholder="내용을 입력해 주세요."></textarea>
+										</div>
+									</div>
+									<button type="button" onclick="save();" class="primary">저장하기</button>
+
+
+<!--									</ul>-->
+								</form>
+							</section>
+							<section class="split">
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-envelope"></span>
+										<h3>Email</h3>
+										<a href="#">information@untitled.tld</a>
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-phone"></span>
+										<h3>Phone</h3>
+										<span>(000) 000-0000 x12387</span>
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-home"></span>
+										<h3>Address</h3>
+										<span>1234 Somewhere Road #5432<br />
+										Nashville, TN 00000<br />
+										United States of America</span>
+									</div>
+								</section>
+							</section>
+
+						</div>
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../static/assets/js/jquery.min.js"></script>
+			<script src="../../static/assets/js/jquery.scrolly.min.js"></script>
+			<script src="../../static/assets/js/jquery.scrollex.min.js"></script>
+			<script src="../../static/assets/js/browser.min.js"></script>
+			<script src="../../static/assets/js/breakpoints.min.js"></script>
+			<script src="../../static/assets/js/util.js"></script>
+			<script src="../../static/assets/js/main.js"></script>
+
+	</body>
+
+	<th:block>
+		<script th:inline="javascript">
+
+
+			/*<![CDATA[*/
+
+			/**
+			 * 유효성 검사
+			 */
+			function isValid() {
+
+				const form = document.getElementById('form');
+
+				if (!form.title.value.trim()) {
+					alert('게시물의 제목을 입력해 주세요.');
+					form.title.value = '';
+					form.title.focus();
+					return false;
+				}
+
+				if (!form.content.value.trim()) {
+					alert('게시물의 내용을 입력해 주세요.');
+					form.content.value = '';
+					form.content.focus();
+					return false;
+				}
+
+				return true;
+			}
+
+			/**
+			 * 게시글 등록(생성/수정)
+			 */
+			function save() {
+
+				if ( !isValid() ) {
+					return false;
+				}
+
+				const form = document.getElementById('form');
+
+				const params = {
+					title: form.title.value,
+					cid: form.cid.value,
+					content: form.content.value,
+				};
+
+				fetch('/api/locations/boards/new', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(params)
+
+				}).then(response => {
+					if (!response.ok) {
+						throw new Error('Request failed...');
+					}
+
+					alert('저장되었습니다.');
+					location.href = '/api/locations';
+
+				}).catch(error => {
+					alert('오류가 발생하였습니다.');
+				});
+			}
+
+			/*]]>*/
+
+
+		</script>
+	</th:block>
+
+
+
+</html>

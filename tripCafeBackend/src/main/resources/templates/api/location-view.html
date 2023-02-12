@@ -73,7 +73,7 @@
 										<td th:text="'카페 이름: ' + ${cafe.name}"></td>
 										<td th:text="'카페 연락처: ' + ${cafe.phoneNum}"></td>
 										<td th:text="'카페 주소: ' + ${cafe.street} + ${cafe.detail}"></td>
-
+										<td><a class="button" th:href="@{/api/locations/boards/new(id=${cafe.id})}">카페 후기 쓰기</a></td>
 									</tr>
 									</table>
 								</div>
