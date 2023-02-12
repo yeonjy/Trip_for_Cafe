@@ -30,11 +30,11 @@ public class CafeService {
     /*
      * location별 카페 리스트 조회
      */
-    public List<CafeResponseDTO> findByLocation (String location) {
+    public List<CafeResponseDTO> findByLocationFirst (String location) {
 //        Optional<Cafe> list = cafeRepository.findByLocation(location);
 //        return list.stream().map(CafeResponseDTO::new).toList();
 
-        return cafeRepository.findByLocation(location)
+        return cafeRepository.findByLocationFirst(location)
                 .stream()
                 .map(CafeResponseDTO::new)
                 .toList();
@@ -43,15 +43,15 @@ public class CafeService {
 
 
 
-    @Transactional
-    public Long update(Long id, CafeUpdateRequestDTO requestDTO) {
-        Cafe cafe = cafeRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 카페가 존재하지 않습니다. id=" + id));
-
-        cafe.update(requestDTO.getName(), requestDTO.getPhoneNum(), requestDTO.getLocation());
-
-        return id;
-    }
+//    @Transactional
+//    public Long update(Long id, CafeUpdateRequestDTO requestDTO) {
+//        Cafe cafe = cafeRepository.findById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("해당 카페가 존재하지 않습니다. id=" + id));
+//
+//        cafe.update(requestDTO.getName(), requestDTO.getPhoneNum(), requestDTO.getLocation());
+//
+//        return id;
+//    }
 
     /*
      * 카페 전체 조회

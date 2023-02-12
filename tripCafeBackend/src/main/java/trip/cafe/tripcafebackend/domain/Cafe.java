@@ -24,10 +24,14 @@ public class Cafe {  //사진 업로드 추가 필요
 
     private String phoneNum;
 
-    private String location;  //입력받은 주소에서 추출하기
+    @Column(name = "location_first")
+    private String locationFirst;  //입력받은 주소에서 추출하기
 
-    @Column(name = "location_detail")
-    private String locationDetail;  //입력받은 주소에서 추출하기
+    @Column(name = "location_second")
+    private String locationSecond;
+
+    @Column(name = "location_third")
+    private String locationThird;
 
     @Embedded
     private Address address;
@@ -35,13 +39,19 @@ public class Cafe {  //사진 업로드 추가 필요
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cafe")
     private List<CafeEvaluate> tags = new ArrayList<>();
 
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Board> boards = new ArrayList<>();
+
     @Builder
-    public Cafe(String name, String phoneNum, Address address, String location, String locationDetail) {
+    public Cafe(Long id, String name, String phoneNum, Address address, String locationFirst, String locationSecond, String locationThird) {
+        this.id = id;
         this.name = name;
         this.phoneNum = phoneNum;
         this.address = address;
-        this.location = location;
-        this.locationDetail = locationDetail;
+        this.locationFirst = locationFirst;
+        this.locationSecond = locationSecond;
+        this.locationThird = locationThird;
     }
 
 

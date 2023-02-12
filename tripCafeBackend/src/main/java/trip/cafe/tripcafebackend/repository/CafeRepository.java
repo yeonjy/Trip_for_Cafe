@@ -16,7 +16,7 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
     /**
      * 카페 location별 조회
      */
-    List<Cafe> findByLocation(String location);
+    List<Cafe> findByLocationFirst(String locationFirst);
 
 
 

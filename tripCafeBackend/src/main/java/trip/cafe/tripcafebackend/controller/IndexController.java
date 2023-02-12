@@ -27,10 +27,10 @@ public class IndexController {
     }
 
 
-    @PutMapping("/locations/cafes/{id}")
-    public Long update(@PathVariable Long id, @RequestBody CafeUpdateRequestDTO requestDTO) {
-        return cafeService.update(id, requestDTO);
-    }
+//    @PutMapping("/locations/cafes/{id}")
+//    public Long update(@PathVariable Long id, @RequestBody CafeUpdateRequestDTO requestDTO) {
+//        return cafeService.update(id, requestDTO);
+//    }
 
 
 }
